@@ -19,7 +19,7 @@ import com.elcio.listadetarefas.model.Person;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FirstFragment extends Fragment {
+public class ListDataFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<Person> personList;
     private MyAdapter myAdapter;
@@ -53,6 +53,10 @@ public class FirstFragment extends Fragment {
             @Override
             public void OnItemClick() {
                 Toast.makeText(getContext(), "item clicado na fragment", Toast.LENGTH_SHORT).show();
+
+                //invoke and show the DetailFragment
+                NavHostFragment.findNavController(ListDataFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_DetailFragment);
             }
         };
     }
@@ -63,7 +67,7 @@ public class FirstFragment extends Fragment {
         view.findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
+                NavHostFragment.findNavController(ListDataFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });

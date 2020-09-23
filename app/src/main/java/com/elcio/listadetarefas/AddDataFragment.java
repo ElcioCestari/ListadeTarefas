@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-public class SecondFragment extends Fragment {
+public class AddDataFragment extends Fragment {
     private EditText editName, editAge;
     private Button btnSave;
 
@@ -50,7 +50,7 @@ public class SecondFragment extends Fragment {
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
+                NavHostFragment.findNavController(AddDataFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });

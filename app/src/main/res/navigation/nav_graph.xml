@@ -7,22 +7,40 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.elcio.listadetarefas.FirstFragment"
+        android:name="com.elcio.listadetarefas.ListDataFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+
+        <action
+            android:id="@+id/action_FirstFragment_to_DetailFragment"
+            app:destination="@id/DetailFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.elcio.listadetarefas.SecondFragment"
+        android:name="com.elcio.listadetarefas.AddDataFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DetailFragment"
+        android:name="com.elcio.listadetarefas.EditDataFragment"
+        android:label="Detalhes"
+        tools:layout="@layout/fragment_edit_data">
+
+
+        <action
+            android:id="@+id/action_DetailFragment_to_FirstFragment"
+            app:destination="@+id/FirstFragment"
+            />
     </fragment>
 </navigation>
