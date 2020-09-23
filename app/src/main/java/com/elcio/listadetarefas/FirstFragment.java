@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elcio.listadetarefas.adapter.MyAdapter;
+import com.elcio.listadetarefas.adapter.OnItemClickListner;
 import com.elcio.listadetarefas.model.Person;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import java.util.List;
 public class FirstFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<Person> personList;
-
+    private MyAdapter myAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -30,13 +32,29 @@ public class FirstFragment extends Fragment {
 
         createPersonsAndAddToPersonList();
 
-        MyAdapter myAdapter = new MyAdapter(personList, getActivity().getApplicationContext());
+        myAdapter = new MyAdapter(personList, getActivity().getApplicationContext());
+
+        myAdapter.setOnItemClickListner(myAdapterOnItemClickListner());
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myAdapter);
 
         return view;
+    }
+
+    /**
+     * <bold>description</bold> - this methods is responsable to implements the item click of recyclerview
+     * @return OnItemClickListner - return a item click implementatio
+     */
+    private OnItemClickListner myAdapterOnItemClickListner() {
+        return new OnItemClickListner() {
+            @Override
+            public void OnItemClick() {
+                Toast.makeText(getContext(), "item clicado na fragment", Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
