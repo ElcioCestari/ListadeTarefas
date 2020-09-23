@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elcio.listadetarefas.R;
+import com.elcio.listadetarefas.adapter.listner.OnItemClickListner;
 import com.elcio.listadetarefas.model.Person;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.attachItem(this.personList.get(position));
         holder.txtName.setText(personList.get(position).getFirstName().toString());
         holder.txtAge.setText(personList.get(position).getAge().toString());
     }
@@ -52,7 +54,9 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtAge;
+        private TextView txtName, txtAge;
+        private Person person;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -62,9 +66,19 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListner.OnItemClick();
+
+                    onItemClickListner.OnItemClick(person);
                 }
             });
+        }
+
+        /**
+         * <bold>description</bold> each RecyclerView item, have a object Person,
+         * and this object is attach to MyViewHolder through this method.
+         * @param person
+         */
+        public void attachItem(Person person) {
+            this.person = person;
         }
     }
 

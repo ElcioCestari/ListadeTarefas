@@ -1,7 +1,8 @@
-package com.elcio.listadetarefas;
+package com.elcio.listadetarefas.ui.activity;
 
 import android.os.Bundle;
 
+import com.elcio.listadetarefas.R;
 import com.elcio.listadetarefas.model.Person;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;

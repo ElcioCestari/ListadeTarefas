@@ -1,4 +1,4 @@
-package com.elcio.listadetarefas;
+package com.elcio.listadetarefas.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,8 +12,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.elcio.listadetarefas.R;
 import com.elcio.listadetarefas.adapter.MyAdapter;
-import com.elcio.listadetarefas.adapter.OnItemClickListner;
+import com.elcio.listadetarefas.adapter.listner.OnItemClickListner;
 import com.elcio.listadetarefas.model.Person;
 
 import java.util.ArrayList;
@@ -51,8 +52,8 @@ public class ListDataFragment extends Fragment {
     private OnItemClickListner myAdapterOnItemClickListner() {
         return new OnItemClickListner() {
             @Override
-            public void OnItemClick() {
-                Toast.makeText(getContext(), "item clicado na fragment", Toast.LENGTH_SHORT).show();
+            public void OnItemClick(Person person) {
+                Toast.makeText(getContext(), "texto " + person.toString(), Toast.LENGTH_SHORT).show();
 
                 //invoke and show the DetailFragment
                 NavHostFragment.findNavController(ListDataFragment.this)

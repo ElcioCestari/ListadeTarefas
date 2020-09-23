@@ -1,4 +1,4 @@
-package com.elcio.listadetarefas;
+package com.elcio.listadetarefas.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.elcio.listadetarefas.R;
 
 public class AddDataFragment extends Fragment {
     private EditText editName, editAge;

@@ -1,4 +1,6 @@
-package com.elcio.listadetarefas.adapter;
+package com.elcio.listadetarefas.adapter.listner;
+
+import com.elcio.listadetarefas.model.Person;
 
 /**
  * @author Elcio Cestari Taira
@@ -8,5 +10,5 @@ package com.elcio.listadetarefas.adapter;
  */
 public interface  OnItemClickListner  {
 
-    public void OnItemClick();
+    public void OnItemClick(Person person);
 }
