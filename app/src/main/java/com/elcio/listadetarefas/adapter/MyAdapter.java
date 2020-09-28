@@ -66,8 +66,15 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     onItemClickListner.OnItemClick(person);
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemClickListner.OnLongItemClick(person);
+                    return false;
                 }
             });
         }
@@ -85,4 +92,5 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder>{
     public void setOnItemClickListner(OnItemClickListner onItemClickListner) {
         this.onItemClickListner = onItemClickListner;
     }
+
 }

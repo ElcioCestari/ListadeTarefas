@@ -59,15 +59,14 @@ public class EditDataFragment extends Fragment {
                 Integer age = Integer.parseInt(editAge.getEditableText().toString());
 
                 editPerson(age, name);
+
             }
         });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*                NavHostFragment.findNavController(EditDataFragment.this).
-                        navigate(R.id.action_DetailFragment_to_FirstFragment);*/
-                navigateToHome();
+                navigateToHome(R.id.action_DetailFragment_to_FirstFragment);
             }
         });
 
@@ -83,16 +82,16 @@ public class EditDataFragment extends Fragment {
 
         if (personDAO.upDate(person)) {
             MyCustomToast(getString(R.string.positive_message_to_update));
-            navigateToHome();
+            navigateToHome(R.id.action_DetailFragment_to_FirstFragment_after_save);
         } else {
             MyCustomToast(getString(R.string.negative_message_to_update));
 
         }
     }
 
-    private void navigateToHome() {
+    private void navigateToHome(Integer  destinationId) {
         NavHostFragment.findNavController(EditDataFragment.this)
-                .navigate(R.id.action_DetailFragment_to_FirstFragment);
+                .navigate( destinationId );
     }
 
     private void MyCustomToast(String msg) {

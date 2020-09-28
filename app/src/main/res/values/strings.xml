@@ -20,4 +20,7 @@
     <string name="data_base_name">lista_de_tareffas</string>
     <string name="positive_message_to_update">Dados Salvos!</string>
     <string name="negative_message_to_update">Atenção! Os Dados não foram salvos</string>
+    <string name="question_title_delete">Deseja apagar?</string>
+    <string name="question_message_delete">O dado será apagado permanentemente</string>
+    <string name="deleted_data_message">Dados apagadoos com sucesso!</string>
 </resources>

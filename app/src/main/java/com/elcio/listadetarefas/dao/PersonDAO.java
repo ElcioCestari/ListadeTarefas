@@ -75,7 +75,17 @@ public class PersonDAO implements InterfaceDAO {
 
     @Override
     public boolean delete(Person person) {
-        return false;
+        String table = DataBaseHelper.PERSON_TABLE_NAME;
+        String whereClause = "id=?";
+        String[] args = {person.getId().toString()};
+
+        try {
+            writeDatabase.delete(table, whereClause, args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override

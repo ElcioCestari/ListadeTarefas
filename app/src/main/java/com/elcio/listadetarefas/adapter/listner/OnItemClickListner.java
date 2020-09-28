@@ -11,4 +11,5 @@ import com.elcio.listadetarefas.model.Person;
 public interface  OnItemClickListner  {
 
     public void OnItemClick(Person person);
+    public void OnLongItemClick(Person person);
 }

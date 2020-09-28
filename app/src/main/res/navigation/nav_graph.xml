@@ -42,5 +42,9 @@
             android:id="@+id/action_DetailFragment_to_FirstFragment"
             app:destination="@+id/FirstFragment"
             />
+        <action
+            android:id="@+id/action_DetailFragment_to_FirstFragment_after_save"
+            app:destination="@+id/FirstFragment"
+            />
     </fragment>
 </navigation>

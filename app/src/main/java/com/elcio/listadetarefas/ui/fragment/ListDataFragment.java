@@ -1,5 +1,8 @@
 package com.elcio.listadetarefas.ui.fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +26,9 @@ import java.util.List;
 
 public class ListDataFragment extends Fragment {
     private RecyclerView recyclerView;
-    private List<Person> personList;
+    private List<Person> personList = new ArrayList<>();
     private MyAdapter myAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -37,23 +41,18 @@ public class ListDataFragment extends Fragment {
     }
 
     @Override
-    public void onStart () {
+    public void onStart() {
         super.onStart();
 
         createPersonsAndAddToPersonList();
 
-        myAdapter = new MyAdapter(personList, getActivity().getApplicationContext());
+//        myAdapter = new MyAdapter(personList, getActivity().getApplicationContext());
 
-        myAdapter.setOnItemClickListner(myAdapterOnItemClickListner());
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(myAdapter);
     }
 
     /**
      * <bold>description</bold> - this methods is responsable to implements the item click of recyclerview
+     *
      * @return OnItemClickListner - return a item click implementation
      */
     private OnItemClickListner myAdapterOnItemClickListner() {
@@ -68,6 +67,31 @@ public class ListDataFragment extends Fragment {
                 NavHostFragment.findNavController(ListDataFragment.this)
                         .navigate(R.id.action_FirstFragment_to_DetailFragment, bundle);
 
+            }
+
+            @Override
+            public void OnLongItemClick(final Person person) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setTitle(getString(R.string.question_title_delete));
+                dialog.setMessage(getString(R.string.question_message_delete));
+
+                dialog.setPositiveButton("sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PersonDAO personDAO = new PersonDAO(getContext());
+
+                        if (personDAO.delete(person)) {
+                            createPersonsAndAddToPersonList();
+                            Toast.makeText(getContext(), getString(R.string.deleted_data_message), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), getString(R.string.negative_message_to_update), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+                dialog.setNegativeButton("nao", null);
+                dialog.create();
+                dialog.show();
             }
         };
     }
@@ -87,33 +111,17 @@ public class ListDataFragment extends Fragment {
 
     private void createPersonsAndAddToPersonList() {
 
-        if (personList != null ) return;
-
         PersonDAO personDAO = new PersonDAO(getActivity().getApplicationContext());
 
         personList = personDAO.getAll();
+        myAdapter = new MyAdapter(personList, getActivity().getApplicationContext());
 
+        myAdapter.setOnItemClickListner(myAdapterOnItemClickListner());
 
-/*
-        Person person;
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(myAdapter);
 
-        person = new Person("Elcio", 34);
-        personList.add(person);
-        person = new Person("Maria", 34);
-        personList.add(person);
-        person = new Person("Tereza", 34);
-        personList.add(person);
-        person = new Person("Luana", 34);
-        personList.add(person);
-        person = new Person("Rebeca", 34);
-        personList.add(person);
-        person = new Person("Esther", 34);
-        personList.add(person);
-        person = new Person("Heitor", 34);
-        personList.add(person);
-        person = new Person("Jesus", 34);
-        personList.add(person);
-        person = new Person("Pedro", 34);
-        personList.add(person);*/
     }
 }
