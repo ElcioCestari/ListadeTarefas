@@ -3,6 +3,7 @@ package com.elcio.listadetarefas.ui.activity;
 import android.os.Bundle;
 
 import com.elcio.listadetarefas.R;
+import com.elcio.listadetarefas.database.DataBaseHelper;
 import com.elcio.listadetarefas.model.Person;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
 
 
         /*

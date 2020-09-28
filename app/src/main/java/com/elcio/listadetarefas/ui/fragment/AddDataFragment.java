@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.elcio.listadetarefas.R;
+import com.elcio.listadetarefas.dao.PersonDAO;
+import com.elcio.listadetarefas.model.Person;
 
 public class AddDataFragment extends Fragment {
     private EditText editName, editAge;
@@ -36,7 +38,14 @@ public class AddDataFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PersonDAO personDAO = new PersonDAO(getActivity().getApplicationContext());
+                Person person = new Person( editName.getText().toString(), Integer.parseInt( editAge.getText().toString() ) );
+
+                personDAO.insert(person);
                 myCustomToast("salvo");
+
+                NavHostFragment.findNavController(AddDataFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         };
     }

@@ -12,4 +12,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="person_bundle_tag">person</string>
+    <string name="age">"idade"</string>
+    <string name="edit_text_hint_name">"Digite seu nome"</string>
+    <string name="button_cancel">"cancel"</string>
+    <string name="button_save">save</string>
+    <string name="data_base_name">lista_de_tareffas</string>
+    <string name="positive_message_to_update">Dados Salvos!</string>
+    <string name="negative_message_to_update">Atenção! Os Dados não foram salvos</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.elcio.listadetarefas.R;
 import com.elcio.listadetarefas.adapter.MyAdapter;
 import com.elcio.listadetarefas.adapter.listner.OnItemClickListner;
+import com.elcio.listadetarefas.dao.PersonDAO;
 import com.elcio.listadetarefas.model.Person;
 
 import java.util.ArrayList;
@@ -31,6 +32,14 @@ public class ListDataFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerView);
 
+
+        return view;
+    }
+
+    @Override
+    public void onStart () {
+        super.onStart();
+
         createPersonsAndAddToPersonList();
 
         myAdapter = new MyAdapter(personList, getActivity().getApplicationContext());
@@ -41,23 +50,24 @@ public class ListDataFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(myAdapter);
-
-        return view;
     }
 
     /**
      * <bold>description</bold> - this methods is responsable to implements the item click of recyclerview
-     * @return OnItemClickListner - return a item click implementatio
+     * @return OnItemClickListner - return a item click implementation
      */
     private OnItemClickListner myAdapterOnItemClickListner() {
         return new OnItemClickListner() {
             @Override
             public void OnItemClick(Person person) {
-                Toast.makeText(getContext(), "texto " + person.toString(), Toast.LENGTH_SHORT).show();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(getString(R.string.person_bundle_tag), person);
 
                 //invoke and show the DetailFragment
                 NavHostFragment.findNavController(ListDataFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_DetailFragment);
+                        .navigate(R.id.action_FirstFragment_to_DetailFragment, bundle);
+
             }
         };
     }
@@ -76,8 +86,15 @@ public class ListDataFragment extends Fragment {
 
 
     private void createPersonsAndAddToPersonList() {
-        personList = new ArrayList<Person>();
 
+        if (personList != null ) return;
+
+        PersonDAO personDAO = new PersonDAO(getActivity().getApplicationContext());
+
+        personList = personDAO.getAll();
+
+
+/*
         Person person;
 
         person = new Person("Elcio", 34);
@@ -97,6 +114,6 @@ public class ListDataFragment extends Fragment {
         person = new Person("Jesus", 34);
         personList.add(person);
         person = new Person("Pedro", 34);
-        personList.add(person);
+        personList.add(person);*/
     }
 }

@@ -1,7 +1,9 @@
 package com.elcio.listadetarefas.model;
 
+import java.io.Serializable;
+
 //TODO keep in mind the necessity to implements the SERIALIZEBLE class
-public class Person {
+public class Person implements Serializable {
     private Integer id;
     private String firstName;
     private Integer age;
@@ -9,6 +11,11 @@ public class Person {
     public Person(String firstName, Integer age) {
         this.firstName = firstName;
         this.age = age;
+    }
+
+    public Person(String name, Integer age, Integer id) {
+        this(name,age);
+        this.id = id;
     }
 
     public Integer getId() {
